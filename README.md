@@ -1,10 +1,12 @@
 # ToDo-Simple-App
 
-*RoomDatabase
-*ViewBinding
-*DiffUtils
-*Swipe to delete
-*Undo deleted item
+Overview :
+* RoomDatabase
+* ViewBinding
+* DiffUtils
+* Swipe to delete
+* Undo deleted item
+<br>
 <br>
 <img alt="emadkeyvani  ToDo-Simple-App" src="/screenshots/Screenshot_1667852895.png" width="30%">
 
