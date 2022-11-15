@@ -1,4 +1,4 @@
-package com.keyvani.todoroomdatabase
+package com.keyvani.todoroomdatabase.ui
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.keyvani.todoroomdatabase.utils.SwipeToDeleteCallback
 import com.keyvani.todoroomdatabase.adapter.TodoAdapter
 import com.keyvani.todoroomdatabase.databinding.ActivityMainBinding
 import com.keyvani.todoroomdatabase.db.TodoEntity
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var todoAdapter: TodoAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
             val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
             itemTouchHelper.attachToRecyclerView(RvTodo)
-
-
         }
-
     }
 
     private fun setupRecyclerView() {
@@ -89,5 +86,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

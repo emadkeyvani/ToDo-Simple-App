@@ -1,4 +1,4 @@
-package com.keyvani.todoroomdatabase
+package com.keyvani.todoroomdatabase.utils
 
 import android.content.Context
 import android.graphics.*
@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.keyvani.todoroomdatabase.R
 
 
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.Callback() {
@@ -14,13 +15,12 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.Callbac
     private val intrinsicWidth = deleteIcon!!.intrinsicWidth
     private val intrinsicHeight = deleteIcon!!.intrinsicHeight
     private val background = ColorDrawable()
-    private val backgroundColor = Color.parseColor("#f44336")
+    private val backgroundColor = Color.RED
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val swipeFlag = ItemTouchHelper.LEFT
         return makeMovementFlags(0, swipeFlag)
-
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -29,8 +29,8 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.Callbac
 
     override fun onChildDraw(
         c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean)
-    {
+        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+    ) {
         val itemView = viewHolder.itemView
         val itemHeight = itemView.bottom - itemView.top
         val isCanceled = dX == 0f && !isCurrentlyActive
@@ -59,7 +59,6 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.Callbac
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
-
 
 
     private fun clearCanvas(c: Canvas?, left: Float, top: Float, right: Float, bottom: Float) {
