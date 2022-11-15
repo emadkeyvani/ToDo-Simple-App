@@ -7,7 +7,7 @@ import com.keyvani.todoroomdatabase.utils.Constants
 @Entity(tableName = Constants.TODO_TABLE)
 data class TodoEntity(
     @PrimaryKey(autoGenerate = true)
-    val todoId: Int,
-    val todoTitle: String,
-    val isChecked: Boolean
+    var todoId: Int = 0,
+    var todoTitle: String = "",
+    var isChecked: Boolean
 )

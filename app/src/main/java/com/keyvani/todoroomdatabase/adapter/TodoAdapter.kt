@@ -10,20 +10,22 @@ import androidx.room.Room
 import com.keyvani.todoroomdatabase.databinding.ItemTodoBinding
 import com.keyvani.todoroomdatabase.db.TodoDatabase
 import com.keyvani.todoroomdatabase.db.TodoEntity
+import com.keyvani.todoroomdatabase.repository.DbRepository
 import com.keyvani.todoroomdatabase.utils.Constants
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TodoAdapter : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+@Singleton
+class TodoAdapter @Inject constructor(): RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var repository: DbRepository
+
+    @Inject
+    lateinit var todoEntity: TodoEntity
 
     private lateinit var binding: ItemTodoBinding
     private lateinit var context: Context
-
-    private val todoDb: TodoDatabase by lazy {
-        Room.databaseBuilder(context, TodoDatabase::class.java, Constants.TODO_DATABASE)
-            .allowMainThreadQueries()
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-    private lateinit var todoEntity: TodoEntity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -50,12 +52,12 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
                     when (isChecked) {
                         true -> {
                             todoEntity = TodoEntity(item.todoId, "${item.todoTitle}", true)
-                            todoDb.dao().updateTodo(todoEntity)
+                            repository.updateTodo(todoEntity)
 
                         }
                         false -> {
                             todoEntity = TodoEntity(item.todoId, "${item.todoTitle}", false)
-                            todoDb.dao().updateTodo(todoEntity)
+                            repository.updateTodo(todoEntity)
                         }
                     }
                 }
